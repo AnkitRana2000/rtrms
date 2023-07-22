@@ -31,7 +31,7 @@ export default function NavBar() {
 
           <ul className="navbar-nav">
             <li className="nav-item">
-              <div className="mt-2">123</div>
+              <div className="mt-2">Admin</div>
             </li>
           
           <li>

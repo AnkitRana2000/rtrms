@@ -11,6 +11,10 @@ import FixedAllocation from "./components/FixedAllocation";
 import PreferredSegment from "./components/PreferredSegment";
 import UploadLiquiedBees from "./components/UploadLiquiedBees";
 import UploadFixedAllocation_PreferredSegment from "./components/UploadFixedAllocation_PreferredSegment";
+import Data from "./pages/Data";
+import Process from "./pages/Process";
+import ShowDataLiquidBees from "./components/ShowDataLiquidBees";
+import ShowDataFixAllocation from "./components/ShowDataFixAllocation";
 
 function App() {
   return (
@@ -33,6 +37,10 @@ function App() {
             <Route path="/preferredSegment" element={<PreferredSegment/>} />
             <Route path="/uploadLiquiedBees" element={<UploadLiquiedBees/>} />
             <Route path="/uploadFixAndPref" element={<UploadFixedAllocation_PreferredSegment/>} />
+            <Route path="/data" element={<Data/>} />
+            <Route path="/process" element={<Process/>} />
+            <Route path="/showDataLiquidBees" element={<ShowDataLiquidBees/>} />
+            <Route path="/showDataFixAllocation" element={<ShowDataFixAllocation/>} />
           </Routes>
         {/* </div>
       </div> */}

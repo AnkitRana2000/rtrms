@@ -17,8 +17,43 @@ export default function SideBar() {
             </Link>
             </li>
             <li className="has-subnav">
+              <Link to="data/">
+              <i class="fa fa-solid fa-database fa-2x"></i>
+                <span className="nav-text">
+                  Data
+                </span>
+              </Link>
+            </li>
+            <li className="has-subnav">
+              <Link to="process/">
+              <i class="fa fa-solid fa-person-running fa-2x"></i>
+                <span className="nav-text">
+                  Process
+                </span>
+              </Link>
+            </li>
+            <li className="has-subnav">
+              <Link to="finalreport/">
+              <i class="fa fa-regular fa-calendar-days fa-2x"></i>
+                <span className="nav-text">
+                  Report
+                </span>
+              </Link>
+            </li>
+            <li className="has-subnav">
+              <Link to="#">
+              <i className="fa fa-solid fa-desktop fa-2x"></i>
+                <span className="nav-text">
+                  Live Monitor
+                </span>
+              </Link>
+            </li>
+
+
+
+            {/* <li className="has-subnav">
               <Link to="bod/">
-              <i className="fa fa-solid fa-landmark fa-2x"></i>
+              <i class="fa fa-regular fa-calendar-days fa-2x"></i>
                 <span className="nav-text">
                   BOD
                 </span>
@@ -39,7 +74,7 @@ export default function SideBar() {
                   EOD-2
                 </span>
               </Link>
-            </li>
+            </li> */}
             
             
             

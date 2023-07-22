@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "../../src/styles/DashBoard.css"
 export default function FixedAllocation() {
   return (
-    <section className="dashboard">
+    <section className="mt-3">
     <div className="container">
       <div className="card col-sm-12">
         <div className="card-body col-sm-12">

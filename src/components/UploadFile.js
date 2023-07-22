@@ -2,58 +2,29 @@ import React from "react";
 import { useState } from "react";
 import urlData from "../auth.json";
 import { useNavigate } from "react-router-dom";
-import "../../src/styles/DashBoard.css"
+import "../../src/styles/DashBoard.css";
 
 export default function UploadFile() {
   const [message, setMessage] = useState("");
-  // const [selectedFiles, setSelectedFiles] = useState([]);
-  const [selectedFiles, setSelectedFiles] = useState({});
- 
+  const [selectedFiles, setSelectedFiles] = useState([]);
 
   const handleFileChange = (event) => {
-    setSelectedFiles(event.target.files);
-
+    setSelectedFiles([...selectedFiles, ...event.target.files]);
   };
 
-  // const handleUpload = async () => {
-  //   const formData = new FormData();
-  //   for (let i = 0; i < selectedFiles.length; i++) {
-  //     formData.append('files', selectedFiles[i]);
-
-  //   }
-  //   console.log("for",formData)
-
-  //   try {
-  //     const response = await fetch(`${urlData.urlData.url}/uploadfilesDemo/`, {
-  //       method: 'POST',
-  //       body: formData,
-  //     });
-
-  //     // Handle the response if needed
-  //     console.log(response);
-  //     const json =await response.json()
-  //     console.log(json)
-  //   } catch (error) {
-  //     console.error('Error uploading files:', error);
-  //   }
-  // };
-
-  // const handleFileChange = (event) => {
-  //   const { name, files } = event.target;
-  //   setSelectedFiles((prevState) => ({ ...prevState, [name]: files }));
-  // };
   const handleUpload = async () => {
     const formData = new FormData();
-    for (const key in selectedFiles) {
-      const files = selectedFiles[key];
-      for (let i = 0; i < files.length; i++) {
-        formData.append(key, files[i]);
-      }
+    for (let i = 0; i < selectedFiles.length; i++) {
+      formData.append("files", selectedFiles[i]);
     }
+    console.log("for", formData);
 
     try {
-      const response = await fetch(`${urlData.urlData.url}/uploadfilesDemo/`, {
-        method: 'POST',
+      const response = await fetch(`${urlData.urlData.url}/v1/uploadFile/`, {
+        method: "POST",
+        headers: {
+          authToken: sessionStorage.token,
+        },
         body: formData,
       });
 
@@ -62,20 +33,19 @@ export default function UploadFile() {
       const json = await response.json();
       console.log(json);
     } catch (error) {
-      console.error('Error uploading files:', error);
+      console.error("Error uploading files:", error);
     }
   };
 
   return (
     <section className="dashboard">
-    <div className="container">
-      <div className="card col-sm-12">
-        <div className="card-body col-sm-12">
+      <div className="container">
+        <div className="card col-sm-12">
+          <div className="card-body col-sm-12">
             <h4>UploadFile</h4>
             <div className="message">
               <p>{message}</p>
             </div>
-
 
             <div className="mt-5">
               <table className="table">
@@ -88,7 +58,6 @@ export default function UploadFile() {
                     <td>
                       <input
                         type="file"
-                        
                         name="rtrms_fo"
                         accept=".csv,.txt,.xlsx,.xls"
                         required
@@ -104,7 +73,6 @@ export default function UploadFile() {
                     <td>
                       <input
                         type="file"
-                        
                         name="rtrms_cm"
                         accept=".csv,.txt,.xlsx,.xls"
                         required
@@ -120,7 +88,6 @@ export default function UploadFile() {
                     <td>
                       <input
                         type="file"
-                        
                         name="rtrms_cd"
                         accept=".csv,.txt,.xlsx,.xls"
                         required
@@ -136,7 +103,6 @@ export default function UploadFile() {
                     <td>
                       <input
                         type="file"
-                        
                         name="trial_balance"
                         accept=".csv,.txt,.xlsx,.xls"
                         required
@@ -154,8 +120,6 @@ export default function UploadFile() {
               >
                 Submit
               </button>
-
-
             </div>
           </div>
         </div>
@@ -163,9 +127,6 @@ export default function UploadFile() {
     </section>
   );
 }
-
-
-
 
 // import React, { useState } from 'react';
 
