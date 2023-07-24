@@ -3,10 +3,9 @@ import urlData from "../auth.json";
 import { DataGrid } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
 import "../../src/styles/DashBoard.css";
-
+import { saveAs } from "file-saver";
 export default function FinalReportTable() {
   const [ReportsData, setReportsData] = useState([]);
-
 
   //Final Report Data API
   const fetchFinalReportData = async () => {
@@ -26,59 +25,57 @@ export default function FinalReportTable() {
         id: index + 1,
       }));
       setReportsData(ReportsData);
-      // console.log(data)
     } catch (error) {
       console.error(error);
     }
   };
-
-  console.log("ReportsData", ReportsData);
   useEffect(() => {
     fetchFinalReportData();
   }, []);
 
-   //Report CSV Generate API
-  
-   const handleDownloadCsv = async () => {
+  //Report CSV Generate API
+
+  const handleDownloadCsv = async () => {
     try {
-      // Replace 'YOUR_API_URL' with the actual URL to download the CSV from
-      const urlData = "YOUR_API_URL";
-      
-      const response = await fetch(`${urlData}/v1/downloadCSV`, {
+      const response = await fetch(`${urlData.urlData.url}/v1/downloadCSV`, {
         method: "GET",
         headers: {
-          Authorization: sessionStorage.token, // Assuming sessionStorage.token contains the authentication token
-          "Content-Type": "application/zip", // Set the appropriate content type for the response
+          authToken: sessionStorage.token,
         },
       });
-  
+
       if (!response.ok) {
         throw new Error("Failed to fetch ZIP file");
       }
-  
-      // Log the response for debugging purposes
-      console.log(response);
-  
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
-  
-      // Create an anchor element to trigger the download
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "downloaded_file.zip"; // Set the filename for the downloaded file
-      document.body.appendChild(a);
-      a.click();
-  
-      // Cleanup
-      document.body.removeChild(a);
-      window.URL.revokeObjectURL(url);
+
+      // Get the ZIP data from the response as an ArrayBuffer
+      const zipData = await response.arrayBuffer();
+
+      // Create a Blob from the ZIP data
+      const zipBlob = new Blob([zipData], { type: "application/zip" });
+      // Get the current date in the format DDMMYYYY
+      const currentDate = new Date()
+        .toLocaleDateString("en-GB", {
+          day: "2-digit",
+          month: "2-digit",
+          year: "numeric",
+        })
+        .replace(/\//g, ""); // Remove slashes from the date
+      // Create a file from the Blob
+      const file = new File([zipBlob], `ICCLCOLL_${currentDate}_.zip`, {
+        type: "application/zip",
+      });
+
+      // You can now perform any desired operations with the 'file' object
+      // For example, if you want to trigger a download, you can use the FileSaver API:
+      saveAs(file, `ICCLCOLL_${currentDate}_.zip`); // Assuming you have the FileSaver library
+
+      // Clean up the temporary URL for the ZIP Blob (if needed, not necessary for file usage)
+      URL.revokeObjectURL(zipBlob);
     } catch (error) {
       console.error("Error downloading ZIP file:", error);
     }
   };
-
-
- 
 
   const columns = [
     { field: "id", headerName: "SR.NO", width: 100, headerClassName: "header" },
@@ -321,8 +318,10 @@ export default function FinalReportTable() {
               <h4>FinalReportTable</h4>
             </div>
 
-
-            <button className="btn btn-outline-secondary  " onClick={handleDownloadCsv}>
+            <button
+              className="btn btn-outline-secondary  "
+              onClick={handleDownloadCsv}
+            >
               Download Coll File
             </button>
 

@@ -20,7 +20,7 @@ const cardStyle = {
   transform: "translate(-50%, -50%)",
 };
 
-export default function Login() {
+export default function Login(props) {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
@@ -42,7 +42,7 @@ export default function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     console.log("hello");
-    let res = await fetch(`${urlData.urlData.url}/v1/login`, {
+    let response = await fetch(`${urlData.urlData.url}/v1/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -53,14 +53,15 @@ export default function Login() {
       }),
     });
 
-    let resJson = await res.json();
+    let resJson = await response.json();
+    console.log(resJson);
     if (resJson.status === "success") {
-      setMessage(res.message);
+      setMessage(resJson.message);
       sessionStorage.setItem("token", resJson.data["access_token"]);
       navigate("/dashboard");
-      
+      props.alert("Logged In", "success");
       console.log(sessionStorage.token);
-    } else if (resJson.status === "unauathorised") {
+    } else if (resJson.status === "Error") {
       setMessage(resJson.message);
       navigate("/");
     }
@@ -76,7 +77,7 @@ export default function Login() {
           <h1 className="text-center mb-3">Log In</h1>
 
           <div className="message">
-            <p>{message}</p>
+            <p className="text-danger">{message}</p>
           </div>
 
           <div className="mb-3">

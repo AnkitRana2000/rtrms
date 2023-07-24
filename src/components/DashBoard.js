@@ -19,7 +19,8 @@ export default function DashBoard() {
   );
 }
 
-{/* <div className="d-flex align-items-center mt-4">
+{
+  /* <div className="d-flex align-items-center mt-4">
   <Link
     to="/finalreport"
     type="button"
@@ -31,4 +32,5 @@ export default function DashBoard() {
   <button type="button" className="btn btn-outline-secondary btn-lg ">
     Download Call File
   </button>
-</div>; */}
+</div>; */
+}

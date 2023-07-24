@@ -38,7 +38,6 @@ export default function ShowDataLiquidBees() {
     }
   };
 
-  console.log("LiquidBeesData", LiquidBeesData);
   useEffect(() => {
     fetchLiquidBeesData();
   }, []);

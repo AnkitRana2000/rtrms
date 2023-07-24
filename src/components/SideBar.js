@@ -33,7 +33,7 @@ export default function SideBar() {
               </Link>
             </li>
             <li className="has-subnav">
-              <Link to="finalreport/">
+              <Link to="reports/">
               <i class="fa fa-regular fa-calendar-days fa-2x"></i>
                 <span className="nav-text">
                   Report

@@ -57,7 +57,7 @@ export default function UploadFixedAllocation_PreferredSegment() {
                       <input
                         type="file"
                         name="fixed_allocation"
-                        accept=".csv,.txt,.xlsx,.xls"
+                        accept=".csv"
                         required
                         onChange={handleFileChange}
                       />
@@ -72,7 +72,7 @@ export default function UploadFixedAllocation_PreferredSegment() {
                       <input
                         type="file"
                         name="preferred_segment"
-                        accept=".csv,.txt,.xlsx,.xls"
+                        accept=".csv"
                         required
                         onChange={handleFileChange}
                       />

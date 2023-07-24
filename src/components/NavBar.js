@@ -6,10 +6,11 @@ import {  useNavigate } from "react-router-dom";
 
 
 
-export default function NavBar() {
+export default function NavBar(props) {
   const logout = () => {
     sessionStorage.removeItem("token");
     sessionStorage.removeItem("role");
+    props.alert("Logged Out", "success");
     navigate("/");
   };
   const navigate = useNavigate();
@@ -21,6 +22,7 @@ export default function NavBar() {
         style={{ backgroundColor: "white" }}
       >
         <div className="container-fluid ">
+        
           <button className="navbar-toggler " type="button">
             <span className="navbar-toggler-icon " />
           </button>

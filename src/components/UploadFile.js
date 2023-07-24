@@ -4,7 +4,7 @@ import urlData from "../auth.json";
 import { useNavigate } from "react-router-dom";
 import "../../src/styles/DashBoard.css";
 
-export default function UploadFile() {
+export default function UploadFile(props) {
   const [message, setMessage] = useState("");
   const [selectedFiles, setSelectedFiles] = useState([]);
 
@@ -12,14 +12,16 @@ export default function UploadFile() {
     setSelectedFiles([...selectedFiles, ...event.target.files]);
   };
 
-  const handleUpload = async () => {
+  const handleUpload = async (e) => {
+    
     const formData = new FormData();
     for (let i = 0; i < selectedFiles.length; i++) {
       formData.append("files", selectedFiles[i]);
     }
     console.log("for", formData);
-
+    
     try {
+      e.preventDefault()
       const response = await fetch(`${urlData.urlData.url}/v1/uploadFile/`, {
         method: "POST",
         headers: {
@@ -32,6 +34,7 @@ export default function UploadFile() {
       console.log(response);
       const json = await response.json();
       console.log(json);
+      props.alert("File Uploading ", "success");
     } catch (error) {
       console.error("Error uploading files:", error);
     }
@@ -59,7 +62,7 @@ export default function UploadFile() {
                       <input
                         type="file"
                         name="rtrms_fo"
-                        accept=".csv,.txt,.xlsx,.xls"
+                        accept=".csv"
                         required
                         onChange={handleFileChange}
                       />
@@ -74,7 +77,7 @@ export default function UploadFile() {
                       <input
                         type="file"
                         name="rtrms_cm"
-                        accept=".csv,.txt,.xlsx,.xls"
+                        accept=".csv"
                         required
                         onChange={handleFileChange}
                       />
@@ -89,7 +92,7 @@ export default function UploadFile() {
                       <input
                         type="file"
                         name="rtrms_cd"
-                        accept=".csv,.txt,.xlsx,.xls"
+                        accept=".csv"
                         required
                         onChange={handleFileChange}
                       />
@@ -104,7 +107,7 @@ export default function UploadFile() {
                       <input
                         type="file"
                         name="trial_balance"
-                        accept=".csv,.txt,.xlsx,.xls"
+                        accept=".csv"
                         required
                         onChange={handleFileChange}
                       />
@@ -115,7 +118,7 @@ export default function UploadFile() {
               <button
                 id="submit-button"
                 className="btn btn-dark my-4"
-                type="button" // Change the type to "button" to prevent form submission
+                type="submit" // Change the type to "button" to prevent form submission
                 onClick={handleUpload}
               >
                 Submit
