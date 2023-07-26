@@ -1,8 +1,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import urlData from "../auth.json";
-import LoginBackGround from "../assets/image/LoginBackground.png";
+import urlData from "../../auth.json";
+import LoginBackGround from "../../assets/image/LoginBackground.png";
 
 const divStyle = {
   position: "relative",
@@ -105,7 +105,19 @@ export default function Login(props) {
               required
             />
           </div>
-          <div className="d-flex justify-content-between align-items-center">
+          
+          <div className="text-center text-lg-start mt-4 pt-2">
+            <button type="submit" className="btn btn-primary w-100">
+              Login
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+}
+
+{/* <div className="d-flex justify-content-between align-items-center">
             <div className="form-check mb-0">
               <input
                 className="form-check-input me-2"
@@ -120,14 +132,4 @@ export default function Login(props) {
             <a href="#!" className="text-body">
               Forgot password?
             </a>
-          </div>
-          <div className="text-center text-lg-start mt-4 pt-2">
-            <button type="submit" className="btn btn-primary w-100">
-              Login
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  );
-}
+          </div> */}

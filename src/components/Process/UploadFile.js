@@ -1,27 +1,31 @@
 import React from "react";
 import { useState } from "react";
-import urlData from "../auth.json";
+import urlData from "../../auth.json";
 import { useNavigate } from "react-router-dom";
-import "../../src/styles/DashBoard.css";
+import "../../styles/DashBoard.css";
+import Loder from "../Features/Loder";
+
 
 export default function UploadFile(props) {
   const [message, setMessage] = useState("");
   const [selectedFiles, setSelectedFiles] = useState([]);
+  const [count, setCount] = useState(false);
+  
 
   const handleFileChange = (event) => {
     setSelectedFiles([...selectedFiles, ...event.target.files]);
   };
 
   const handleUpload = async (e) => {
-    
     const formData = new FormData();
     for (let i = 0; i < selectedFiles.length; i++) {
       formData.append("files", selectedFiles[i]);
     }
-    console.log("for", formData);
-    
+    console.log("formData", formData);
+
     try {
-      e.preventDefault()
+      // e.preventDefault();
+      setCount(true)
       const response = await fetch(`${urlData.urlData.url}/v1/uploadFile/`, {
         method: "POST",
         headers: {
@@ -31,21 +35,32 @@ export default function UploadFile(props) {
       });
 
       // Handle the response if needed
-      console.log(response);
+      
       const json = await response.json();
-      console.log(json);
-      props.alert("File Uploading ", "success");
+      console.log(json)
+      setCount(false)
+      if ((json.status == "success")) {
+        props.alert(json.message, "success");
+        // window.location.reload(true);
+        setSelectedFiles([])
+      } else {
+        props.alert(json.message, "warning");
+        // window.location.reload(true);
+      }
     } catch (error) {
       console.error("Error uploading files:", error);
+      
     }
   };
 
   return (
     <section className="dashboard">
+      
       <div className="container">
         <div className="card col-sm-12">
           <div className="card-body col-sm-12">
             <h4>UploadFile</h4>
+           
             <div className="message">
               <p>{message}</p>
             </div>
@@ -107,7 +122,7 @@ export default function UploadFile(props) {
                       <input
                         type="file"
                         name="trial_balance"
-                        accept=".csv"
+                        
                         required
                         onChange={handleFileChange}
                       />
@@ -115,6 +130,8 @@ export default function UploadFile(props) {
                   </tr>
                 </tbody>
               </table>
+              
+              {count && <Loder/>}
               <button
                 id="submit-button"
                 className="btn btn-dark my-4"

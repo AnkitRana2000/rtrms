@@ -18,9 +18,6 @@
   }
   
   /* Show the menu toggle button only on smaller screens */
- 
- 
-  
   .area {
     /* Define the styles for the sidebar area */
     float: left;
@@ -46,5 +43,6 @@
     z-index:1000;
   }
   
+ 
 
   

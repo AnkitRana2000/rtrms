@@ -1,12 +1,14 @@
 import React from 'react'
 import { useState } from "react";
-import urlData from "../auth.json";
+import urlData from "../../auth.json";
+import { useNavigate } from 'react-router-dom';
+import Loder from '../Features/Loder';
 
-import "../../src/styles/DashBoard.css"
 
-export default function UploadLiquiedBees() {
-  const [selectedFiles, setSelectedFiles] = useState([]);
- 
+export default function UploadFixAllocation(props) {
+const [selectedFiles, setSelectedFiles] = useState([]);
+const [count, setCount] = useState(false);
+ const navi = useNavigate()
 
   const handleFileChange = (event) => {
     setSelectedFiles([...selectedFiles,...event.target.files]);
@@ -14,15 +16,16 @@ export default function UploadLiquiedBees() {
   };
 
   const handleUpload = async () => {
+   
     const formData = new FormData();
     for (let i = 0; i < selectedFiles.length; i++) {
       formData.append('files', selectedFiles[i]);
 
     }
-    console.log("for",formData)
 
     try {
-      const response = await fetch(`${urlData.urlData.url}/v1/uploadfileliquidbees`, {
+      setCount(true)
+      const response = await fetch(`${urlData.urlData.url}/v1/uploadFileFixedAllowcation`, {
         method: 'POST',
         headers: {
           authToken: sessionStorage.token,
@@ -30,36 +33,39 @@ export default function UploadLiquiedBees() {
         body: formData,
       });
 
-      // Handle the response if needed
-      console.log(response);
       const json =await response.json()
       console.log(json)
+      setCount(false)
+      if (json.status=="success"){
+        props.alert(json.message, "success");
+        navi("/showDataFixAllocation")
+      } else{
+        console.log("ele");
+        props.alert(json.message, "warning");
+      }
     } catch (error) {
       console.error('Error uploading files:', error);
     }
   };
 
-
-
-
   return (
-    <section className="mt-3">
-    <div className="container">
+    <section>
+    <div className="container mt-3">
       <div className="card col-sm-12">
         <div className="card-body col-sm-12">
             <h4>Preferred Client</h4>
-            <div className="mt-5">
+            <div >
               <table className="table">
                 <tbody>
                   <tr>
                     <td>
-                      <label>Upload Liquied Bees</label>
+                      <label>Upload Fix Allocation</label>
                       <span style={{ color: "red" }}> *</span>
                     </td>
                     <td>
                       <input
                         type="file"
-                        name="liquiedbees"
+                        name="fixAllocation"
                         accept=".csv"
                         required
                         onChange={handleFileChange}
@@ -69,9 +75,10 @@ export default function UploadLiquiedBees() {
                 </tbody>
               </table>
               <br />
+              {count && <Loder/>}
               <button
                 id="submit-button"
-                className="btn btn-dark my-4"
+                className="btn btn-dark "
                 type="submit"
                 value="Upload-Files"
                 onClick={handleUpload}

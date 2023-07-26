@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
-import urlData from "../auth.json";
-import { DataGrid } from "@mui/x-data-grid";
+import urlData from "../../auth.json";
+import { DataGrid ,GridToolbar} from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
-import "../../src/styles/DashBoard.css";
+import "../../styles/DashBoard.css";
 import { saveAs } from "file-saver";
-export default function FinalReportTable() {
+
+
+
+export default function FinalReportTable(props) {
   const [ReportsData, setReportsData] = useState([]);
 
   //Final Report Data API
@@ -43,11 +46,19 @@ export default function FinalReportTable() {
           authToken: sessionStorage.token,
         },
       });
+      console.log("response",response)
+      if(response.ok){
+        props.alert("Successfully Download ZipFile","success")
+      }
+      else{
+        props.alert(response.message,"warning")
+      }
 
       if (!response.ok) {
         throw new Error("Failed to fetch ZIP file");
       }
 
+      
       // Get the ZIP data from the response as an ArrayBuffer
       const zipData = await response.arrayBuffer();
 
@@ -72,6 +83,7 @@ export default function FinalReportTable() {
 
       // Clean up the temporary URL for the ZIP Blob (if needed, not necessary for file usage)
       URL.revokeObjectURL(zipBlob);
+    
     } catch (error) {
       console.error("Error downloading ZIP file:", error);
     }
@@ -82,18 +94,18 @@ export default function FinalReportTable() {
     {
       field: "AccountCode",
       headerName: "Account Code",
-      width: 100,
+      width: 120,
       headerClassName: "header",
     },
     {
       field: "DebitBalance",
-      headerName: "Debit Balance",
+      headerName: "DEBIT_BALANCE",
       width: 120,
       headerClassName: "header",
     },
     {
       field: "CreditBalance",
-      headerName: "Credit Balance",
+      headerName: "CREDIT_BALANCE",
       width: 120,
       headerClassName: "header",
     },
@@ -344,6 +356,9 @@ export default function FinalReportTable() {
                       columnHeaderHeight={30}
                       rows={ReportsData}
                       columns={columns}
+                      slots={{
+                        toolbar: GridToolbar,
+                      }}
                     />
                   </Box>
                 </div>

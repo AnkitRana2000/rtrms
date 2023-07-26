@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../../src/styles/DashBoard.css";
+import "../../styles/DashBoard.css";
 
 export default function BOD() {
   return (

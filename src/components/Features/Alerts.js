@@ -10,11 +10,11 @@ export default function Alerts(props) {
         
 }
   return (
-    <div>
+    <div >
       {props.alert && 
-        <Stack sx={{ width: "100%" }} spacing={2}>
-        <Alert severity="success"><strong>{capital(props.alert.type)}!! </strong> {props.alert.msg}.</Alert>
-       </Stack>}
+        <Stack sx={{ paddingLeft:"50px", width: "100%" }} spacing={2}>
+        <Alert severity={props.alert.type}><strong>{capital(props.alert.type)}!! </strong> {props.alert.msg}.</Alert>
+        </Stack>}
     </div>
     
   );

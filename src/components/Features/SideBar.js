@@ -1,5 +1,5 @@
 import React from 'react'
-import '../styles/SideBar.css'
+import '../../styles/SideBar.css'
 import {Link } from "react-router-dom";
 
 export default function SideBar() {
@@ -41,7 +41,7 @@ export default function SideBar() {
               </Link>
             </li>
             <li className="has-subnav">
-              <Link to="#">
+              <Link to="liveMonitor/">
               <i className="fa fa-solid fa-desktop fa-2x"></i>
                 <span className="nav-text">
                   Live Monitor

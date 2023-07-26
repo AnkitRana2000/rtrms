@@ -1,0 +1,19 @@
+.container{
+  margin-top:100px;
+}
+
+
+/* Default style */
+.card-container {
+  background-color: #dd563469;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+/* Hover style */
+.card-container:hover {
+  background-color: #ee6d4da9;
+  transform: translateY(-5px);
+}
+
+
+
