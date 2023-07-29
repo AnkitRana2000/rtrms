@@ -12,7 +12,7 @@ export default function Reports() {
               <h4 className="mb-3">Reports</h4>
 
               <div className="row">
-                <div className="col-sm-3 mb-3 mb-sm-0 ms-3">
+                <div className="col-sm-3  mb-3 mb-sm-0 ms-3 ">
                   <Link to="/finalreport" style={{ textDecoration: "none" }}>
                     <div className="card card-container">
                       <div className="card-body">
@@ -22,7 +22,7 @@ export default function Reports() {
                   </Link>
                 </div>
 
-                <div className="col-sm-3">
+                <div className="col-sm-3  mb-3">
                   <Link to="3" style={{ textDecoration: "none" }}>
                     <div className="card card-container">
                       <div className="card-body">

@@ -21,6 +21,7 @@ import Alerts from "./components/Features/Alerts";
 import UploadFixAllocation from "./components/Data/UploadFixAllocation";
 import LiveMonitor from "./pages/LiveMonitor";
 import OverAllUtilisation from "./components/LiveMonitor/OverAllUtilisation";
+import Sample from "./pages/Sample";
 
 
 function App() {
@@ -34,8 +35,8 @@ function App() {
   return (
     <>
       <BrowserRouter> 
-        <NavBar alert={showalert} alert1={alert}/>
-      {/* <Alerts alert={alert}/> */}
+        <NavBar alert={showalert} alert1={alert}/> 
+       <Alerts alert={alert}/>
         <Routes>
           <Route path="/" element={<Login alert={showalert}/>} />
           <Route path="/dashboard" element={<DashBoard />} />
@@ -60,6 +61,8 @@ function App() {
           <Route path="/reports" element={<Reports />} />
           <Route path="/liveMonitor" element={<LiveMonitor />} />
           <Route path="/overAllUtilisation" element={<OverAllUtilisation />} />
+
+          {/* <Route path="/sample" element={<Sample />} /> */}
         </Routes>
       </BrowserRouter>
     </>

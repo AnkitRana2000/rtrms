@@ -72,8 +72,8 @@ export default function Login(props) {
       className="d-flex justify-content-center align-items-center vh-100"
       style={divStyle}
     >
-      <div className="card  shadow p-4" style={cardStyle}>
-        <form onSubmit={handleLogin} className="container w-100 ">
+      <div className="card  shadow p-4 " style={cardStyle}>
+        <form onSubmit={handleLogin} className="mt-3 mb-3 w-100 ">
           <h1 className="text-center mb-3">Log In</h1>
 
           <div className="message">

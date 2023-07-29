@@ -4,22 +4,20 @@ import Alerts from "../Features/Alerts";
 
 export default function DashBoard(props) {
   return (
-  <>
-  {/* <p className="text-center">{props.alert}</p> */}
-    <section className="dashboard ">
-      <div className="container">
-        <div className="card col-sm-12">
-          <div className="card-body col-sm-12">
-            <div className="d-flex align-items-center justify-content-between">
-              
-              <div>
-                <h4>Dashboard</h4>
+    <>
+      <section className="dashboard ">
+        <div className="container">
+          <div className="card col-sm-12">
+            <div className="card-body col-sm-12">
+              <div className="d-flex align-items-center justify-content-between">
+                <div>
+                  <h4>Dashboard</h4>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
     </>
   );
 }

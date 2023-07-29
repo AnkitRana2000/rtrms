@@ -11,7 +11,7 @@ export default function Data() {
               <h4>Data</h4>
             </div>
 
-            <div className="mt-5">
+            <div className="mt-3">
               <table className="table">
                 <tbody>
                   <tr className="table-info">

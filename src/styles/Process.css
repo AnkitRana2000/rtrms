@@ -1,0 +1,18 @@
+.container{
+    margin-top:100px;
+    height: 600px;
+}
+
+
+/* Default style */
+.card-container {
+  background-color: #93d6df;
+  text-align: center;
+    transition: background-color 0.2s, transform 0.2s;
+  }
+  
+  /* Hover style */
+  .card-container:hover {
+    background-color: #11606369;
+    transform: translateY(-5px);
+  }

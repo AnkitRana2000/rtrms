@@ -122,7 +122,7 @@ export default function UploadFile(props) {
                       <input
                         type="file"
                         name="trial_balance"
-                        
+                        accept=".xls"
                         required
                         onChange={handleFileChange}
                       />
